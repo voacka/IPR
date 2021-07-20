@@ -12,16 +12,18 @@ public class Main {
         BufferedReader br = new BufferedReader(new FileReader(fullLog));
         int fullLogLines = 0;
         while (br.readLine() != null) fullLogLines++;
+        InputStreamReader isr = new InputStreamReader(new FileInputStream(fullLog), "cp1251");
 
         int dividedLogLines = fullLogLines / 5;
 
-        BufferedReader logReader = new BufferedReader(new FileReader(fullLog));
+        BufferedReader logReader = new BufferedReader(isr);
 
         for (int i = 1; i < 6; i++) {
             FileWriter writer = new FileWriter(args[1] + i);
             for (int j = 0; j < dividedLogLines; j++) {
                 String dividedLog = logReader.readLine() + "\n";
                 writer.write(dividedLog);
+                System.out.println(dividedLog);
             }
             writer.close();
         }
